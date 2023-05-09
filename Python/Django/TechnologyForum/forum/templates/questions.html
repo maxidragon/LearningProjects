@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% if user.is_authenticated %}
+        <form method="get" action="{% url 'forum:questions' %}">
+            <div class="mb-3">
+                <label for="id_category">Category</label><select name="category" id="id_category"
+                                                                 class="form-control w-25">
+                {% for shortcut, fullName in categories %}
+
+                    {% if shortcut == category %}
+                        <option value="{{ shortcut }}" selected>{{ fullName }}</option>
+                    {% else %}
+                        <option value="{{ shortcut }}">{{ fullName }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        </form>
+        {% for question in questions %}
+            <div class="card text-center">
+                <div class="card-header">
+                    {{ question.title }}
+                </div>
+                <div class="card-body">
+                    <p class="card-text">{{ question.text|truncatewords:10 }}</p>
+                    <a href="{% url 'forum:detail' question.id %}" class="btn btn-primary">Read more</a>
+
+
+                </div>
+                <div class="card-footer text-muted">
+                    {{ question.date|date:"l j E o" }}
+                </div>
+            </div>
+        {% endfor %}
+
+
+    {% endif %}
+
+{% endblock content %}

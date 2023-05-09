@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block title %}
+    Edit
+{% endblock title %}
+
+{% block content %}
+
+
+    <h1>Edit question</h1>
+    {% if error %}
+        <div class="alert alert-danger" role="alert">
+            <h2>Error</h2>
+            {{ error }}
+        </div>
+    {% endif %}
+    <div class="col-md-4">
+        <form action="{% url 'forum:edit' question.id %}" method="post" enctype="multipart/form-data">
+            <hr/>
+            <div class="mb-3">
+                <label for="id_title" class="form-label">Title:</label>
+                <input type="text" name="title" maxlength="100" required="" id="id_title" class="form-control"
+                       value="{{ question.title }}">
+            </div>
+            <div class="mb-3">
+                <label for="id_text" class="form-label">Text:</label>
+                <textarea name="text" cols="40" rows="10" required="" id="id_text"
+                          class="form-control">{{ question.text }}</textarea>
+            </div>
+            <div class="mb-3">
+                <label for="id_image" class="form-label">Image:</label>
+                <input type="file" name="image" accept="image/*" id="id_image" class="form-control">
+                {% if question.image %}
+                    <a href="{{ question.image.url }}" target="_blank">Current image</a>
+                {% endif %}
+            </div>
+            <div class="mb-3">
+                <label for="id_category" class="form-label">Category:</label>
+                <select name="category" id="id_category" class="form-control">
+                    {% for shortcut, fullName in categories %}
+                        {% if shortcut == question.category %}
+                            <option value="{{ shortcut }}" selected>{{ fullName }}</option>
+                        {% else %}
+                            <option value="{{ shortcut }}">{{ fullName }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+            {% csrf_token %}
+            <div style="padding-bottom: 10px;">
+                <div class="row p-2">
+                    <button type="submit" class="w-100 btn btn-lg btn-success">Edit</button>
+                </div>
+            </div>
+        </form>
+            <div class="row p-2" style="padding-bottom: 10px;">
+                    <form method="post" action="{% url 'forum:delete' question.id %}">
+                        <button type="submit" class="btn btn-danger w-100 btn-lg">Delete</button>
+                        {% csrf_token %}
+                    </form>
+            </div>
+    </div>
+
+{% endblock content %}

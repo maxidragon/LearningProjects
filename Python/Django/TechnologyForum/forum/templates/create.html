@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block title %}
+    Ask question
+{% endblock title %}
+
+{% block content %}
+
+
+    <h1>Ask question</h1>
+    {% if error %}
+        <div class="alert alert-danger" role="alert">
+            <h2>Error</h2>
+            {{ error }}
+        </div>
+    {% endif %}
+    <div class="col-md-4">
+        <form action="{% url 'forum:create' %}" method="post" enctype="multipart/form-data">
+            <hr/>
+            <div class="mb-3">
+                <label for="id_title" class="form-label">Title:</label>
+                <input type="text" name="title" maxlength="100" required="" id="id_title" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label for="id_text" class="form-label">Text:</label>
+                <textarea name="text" cols="40" rows="10" required="" id="id_text" class="form-control"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="id_image" class="form-label">Image:</label>
+                <input type="file" name="image" accept="image/*" id="id_image" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label for="id_category" class="form-label">Category:</label>
+                <select name="category" id="id_category" class="form-control">
+                    {% for shortcut, fullName in categories %}
+                        <option value="{{ shortcut }}">{{ fullName }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            {% csrf_token %}
+            <div style="padding-bottom: 10px;">
+                <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-success">Ask question</button>
+            </div>
+        </form>
+
+
+    </div>
+    </div>
+
+{% endblock content %}

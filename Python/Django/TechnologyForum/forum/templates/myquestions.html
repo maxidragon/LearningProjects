@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    {% if user.is_authenticated %}
+
+        {% for question in questions %}
+            <div class="card text-center">
+                <div class="card-header">
+                    {{ question.title }}
+                </div>
+                <div class="card-body">
+                    <p class="card-text">{{ question.text|truncatewords:10 }}</p>
+                    <a href="{% url 'forum:detail' question.id %}" class="btn btn-primary">Read more</a>
+                    <a href="{% url 'forum:edit' question.id %}" class="btn btn-success">Edit</a>
+                </div>
+                <div class="card-footer text-muted">
+                    {{ question.date|date:"l j E o" }}
+                </div>
+            </div>
+        {% endfor %}
+
+
+    {% endif %}
+
+{% endblock content %}

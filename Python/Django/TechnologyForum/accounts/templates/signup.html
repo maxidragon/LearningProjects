@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block title %}
+    Sign up
+{% endblock title %}
+
+{% block content %}
+    <h1>Sign up</h1>
+    {% if message %}
+        <div class="alert alert-danger" role="alert">
+            <h2>Error</h2>
+            {{ message }}
+        </div>
+    {% endif %}
+    {% if messages %}
+        <div class="alert alert-danger" role="alert">
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+    <div class="col-md-4">
+        <hr/>
+        <form action="{% url 'accounts:signup' %}" method="post">
+            <div class="mb-3">
+                <label for="id_username" class="form-label">Username:</label>
+                <input type="text" name="username" maxlength="150" autocapitalize="none" autocomplete="username"
+                       autofocus=""
+                       required="" id="id_username"
+                       class="form-control"
+                       value="{{ username }}"
+                >
+            </div>
+            <div class="mb-3">
+                <label for="id_email" class="form-label">Email:</label>
+                <input type="email" name="email" maxlength="150" autocapitalize="none" autocomplete="username"
+                       autofocus=""
+                       required="" id="id_email"
+                       class="form-control"
+                       value="{{ email }}"
+                >
+            </div>
+            <div class="mb-3">
+                <label for="id_password1" class="form-label">Password:</label>
+                <input type="password" name="password1" autocomplete="new-password" required="" id="id_password1"
+                       class="form-control">
+            </div>
+            <div class="mb-3">
+                <label for="id_password2" class="form-label">Password confirmation:</label>
+                <input type="password" name="password2" autocomplete="new-password" required="" id="id_password2"
+                       class="form-control">
+            </div>
+
+
+            <button type="submit" class="btn btn-primary">Sign up</button>
+            {% csrf_token %}
+        </form>
+    </div>
+{% endblock content %}
