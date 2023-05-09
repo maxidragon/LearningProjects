@@ -1,7 +1,7 @@
 # My learning projects
 
 
-Welcome to my GitHub repository of learning projects! This repository contains a collection of my personal projects, which I've worked on over the years to develop my skills in various programming languages and technologies.
+Welcome to my GitHub repository of learning projects! This repository contains a collection of my good personal projects, which I've worked on s to develop my skills in various programming languages and technologies.
 
 I started learning programming at 2017. As you navigate through my repository, you'll find projects ranging from simple exercises to more complex applications, each of which I have completed as part of my learning journey.
 
