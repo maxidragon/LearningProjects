@@ -1,4 +1,4 @@
-# LearningProjects
+# My learning projects
 
 
 Welcome to my GitHub repository of learning projects! This repository contains a collection of my personal projects, which I've worked on over the years to develop my skills in various programming languages and technologies.
