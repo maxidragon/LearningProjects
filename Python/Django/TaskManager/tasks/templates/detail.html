@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>{{error}}</h2>
+<div class="col-md-4">
+    <form action="{% url 'detail' task.id %}" method="post">
+        <div class="mb-3">
+            <label for="id_title" class="form-label">Title</label>
+            <input type="text" name="title" value="{{task.title}}" maxlength="100" required="" id="id_title"
+                   class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="id_description" class="form-label">Description</label>
+            <textarea name="description" cols="40" rows="10" id="id_description" class="form-control">{{task.description}}</textarea>
+        </div>
+        <div class="mb-3">
+            <input type="checkbox" name="importance" id="id_importance" class="form-check-input"
+                   {% if task.importance %}
+                   checked
+                   {% endif %}>
+            <label for="id_importance" class="form-label">Importance</label>
+        </div>
+
+        <input type="submit" value="Submit" class="btn btn-primary"/>
+        {% csrf_token %}
+    </form>
+    <form method="post" action="{% url 'delete' task.id %}">
+        <button type="submit" class="btn btn-danger">Delete</button>
+        {% csrf_token %}
+    </form>
+    <form method="post" action="{% url 'complete' task.id %}">
+        <button type="submit" class="btn btn-success">Complete</button>
+        {% csrf_token %}
+    </form>
+</div>
+{% endblock content %}

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}
+Log in
+{% endblock title %}
+
+{% block content %}
+
+
+<h1>Log in</h1>
+{% if error %}
+<h3>{{error}}</h3>
+{% endif %}
+
+    <div class="col-md-4">
+        <form action="{% url 'login' %}" method="post">
+            <hr/>
+            <div class="mb-3">
+                <label for="id_username" class="form-label">Username:</label>
+                <input type="text" name="username" autofocus="" autocapitalize="none" autocomplete="username"
+                       maxlength="150"
+                       required="" id="id_username"
+                class="form-control"
+                >
+            </div>
+            <div class="mb-3">
+                <label for="id_password" class="form-label">Password:</label>
+                <input type="password" name="password" autocomplete="current-password" required="" id="id_password"
+                class="form-control">
+            </div>
+            <div style="padding-bottom: 10px;">
+                <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Log in</button>
+            </div>
+            {% csrf_token %}
+        </form>
+    </div>
+
+
+</form>
+{% endblock content %}

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}
+Sign up
+{% endblock title %}
+
+{% block content %}
+<h1>Sign up</h1>
+{% if message %}
+<h3>{{message}}</h3>
+{% endif %}
+<div class="col-md-4">
+    <hr/>
+    <form action="{% url 'signup' %}" method="post">
+        <div class="mb-3">
+            <label for="id_username" class="form-label">Username:</label>
+            <input type="text" name="username" maxlength="150" autocapitalize="none" autocomplete="username"
+                   autofocus=""
+                   required="" id="id_username"
+                   class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="id_password1" class="form-label">Password:</label>
+            <input type="password" name="password1" autocomplete="new-password" required="" id="id_password1"
+                   class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="id_password2" class="form-label">Password confirmation:</label>
+            <input type="password" name="password2" autocomplete="new-password" required="" id="id_password2"
+                   class="form-control">
+        </div>
+
+
+        <button type="submit" class="btn btn-primary">Sign up</button>
+        {% csrf_token %}
+    </form>
+</div>
+{% endblock content %}

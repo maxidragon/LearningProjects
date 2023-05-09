@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Create task</h1>
+{{error}}
+<div class="col-md-4">
+    <form action="{% url 'create' %}" method="post">
+        <div class="mb-3">
+            <label for="id_title" class="form-label">Title</label>
+            <input type="text" name="title" maxlength="100" required="" id="id_title" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="id_description" class="form-label">Description</label>
+            <textarea name="description" cols="40" rows="10" id="id_description" class="form-control"></textarea>
+        </div>
+        <div class="mb-3">
+
+            <input type="checkbox" name="importance" id="id_importance" class="form-check-input">
+            <label for="id_importance" class="form-label">Importance</label>
+        </div>
+
+
+        {% csrf_token %}
+        <input type="submit" class="btn btn-primary" value="Submit">
+    </form>
+</div>
+{% endblock content %}

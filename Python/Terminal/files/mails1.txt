@@ -1,0 +1,5 @@
+emails:
+mailto:pawel@wp.pl
+mailto:piotr@wp.pl
+mailto:antek@wp.pl
+mailto:a@a.pl

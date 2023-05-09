@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Post detail</title>
+</head>
+<body>
+<h1>{{post.title}}</h1>
+<h3>{{post.date}}</h3>
+<p>{{post.text}}</p>
+{% if post.image %}
+<img src="{{post.image.url}}" alt="No image" />
+{% endif %}
+</body>
+</html>

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>My tasks</h1>
+<h2>Current tasks</h2>
+
+
+{% if not tasks %}
+You don't have any tasks to do
+{% else %}
+<ul>
+    {% for task in tasks %}
+    <li>
+        <a href="{% url 'detail' task.id %}"> {{task.title}} {{ task.createDate|date:"j F, Y" }}</a>
+    </li>
+    {% endfor %}
+</ul>
+
+{% endif %}
+
+<h2>Completed tasks</h2>
+
+{% if not completedTasks %}
+You haven't completed any task yet
+{% else %}
+<ul>
+    {% for task in completedTasks %}
+    <li>
+        <a href="{% url 'detail' task.id %}"> {{task.title}} {{ task.createDate|date:"j F, Y" }}</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+
+{% endblock content %}

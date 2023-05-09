@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<ul>
+    <h1>I've written {{posts.count}} post{{posts|pluralize}}</h1>
+{% for post in posts %}
+    <h3><a href="{% url 'detail' post.id %}">{{ post.title }}</a></h3>
+    <h5>{{post.date|date:"l j E o"}}</h5>
+
+    <p>
+        {{post.text|truncatewords:10}}
+    </p>
+{% endfor %}
+</ul>
+</body>
+</html>
