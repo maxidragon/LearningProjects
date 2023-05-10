@@ -1,0 +1,78 @@
+﻿@model WebApplication1.Models.ViewModels.OrderViewModel
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Order</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateOrderWithDetails">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="OrderDate" class="control-label"></label>
+                <input asp-for="OrderDate" class="form-control" />
+                <span asp-validation-for="OrderDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CustomerId" class="control-label"></label>
+                <select asp-for="CustomerId" class="form-control" asp-items="ViewBag.CustomerId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="EmployeeID" class="control-label"></label>
+                <select asp-for="EmployeeID" class="form-control" asp-items="ViewBag.EmployeeID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="ShipperId" class="control-label"></label>
+                <select asp-for="ShipperId" class="form-control" asp-items="ViewBag.ShipperId"></select>
+            </div>
+            <hr />
+            <button id="plus" type="button" onclick="addRow()">+</button>
+            <div id="orderDetails">
+                <div class="orderDetail">
+                    <div class="form-group">
+                        <label></label>
+                        <select name="OrderDetailsList[0].ProductId" class="form-control" asp-items="ViewBag.ProductId"></select>
+                    </div>
+                    <div class="form-group">
+                        <label></label> 
+                        <input name="OrderDetailsList[0].Quantity" class="form-control" />
+                    </div>
+                </div>
+            </div>
+
+            <hr />
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+            
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
+    <script>
+        const btn = document.getElementById("plus");
+        const orderDetails = document.getElementById("orderDetails");
+        
+        var counter = 1;
+        function addRow() {
+            $(".orderDetail").first().clone().appendTo("#orderDetails");
+            var querySelectorSelect = document.querySelector("#orderDetails > div:nth-child(" + counter + ") > div:nth-child(1) > select");
+            var querySelectorInput = document.querySelector("#orderDetails > div:nth-child(" + counter + ") > div:nth-child(2) > input");
+            querySelectorSelect.name = 'OrderDetailsList[' + counter + '].ProductId';
+            querySelectorInput.name = 'OrderDetailsList[' + counter + '].Quantity';
+            counter++;
+        }
+
+    </script>
