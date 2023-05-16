@@ -1,7 +1,4 @@
 import random
-#tasowanie kart
-#rozdanie 2 userom kart po 5
-#porownywanie
 cardList = ["9", "9", "9", "9",
             "10", "10", "10", "10",
             "Jack", "Jack", "Jack", "Jack",
@@ -31,5 +28,5 @@ for i in range(0, 5):
     elif cardU1 < cardU2:
         score2 += 1
     elif cardU1 == cardU2:
-        print('Remis')
+        print('Tie')
     print(f'{score1}:{score2}')

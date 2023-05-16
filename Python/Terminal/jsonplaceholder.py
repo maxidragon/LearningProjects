@@ -16,7 +16,6 @@ todos_content = get_content(todos)
 
 
 
-#wyswietlenie id i username
 #users = {}
 # for i in users_content:
 #     users[i['id']] = i['username']
@@ -30,7 +29,6 @@ todos_content = get_content(todos)
 # for i in posts_content:
 #     users_posts[i['userId']] += 1
 # print(users_posts)
-#ile wykonach todos
 users_todos = {}
 for user in users_content:
     users_todos[user['id']] = 0
@@ -39,7 +37,6 @@ for todo in todos_content:
     if todo['completed']:
         users_todos[todo['userId']] += 1
 print(users_todos)
-#imie, nazwisko, adres userow o najwiekszej liczbie todos zrobionych
 users_with_completed_tasks = []
 for user_id in users_todos:
     if users_todos[user_id] == max(users_todos.values()):
