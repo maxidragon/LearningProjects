@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from rest_framework.permissions import AllowAny, IsAdminUser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -17,6 +18,13 @@ class ArticleDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ArticleSerializer
 
 
-class ListCreateUser(generics.ListCreateAPIView):
+class ListUser(generics.ListAPIView):
+    permission_classes = [IsAdminUser]
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
+class CreateUser(generics.CreateAPIView):
+    permission_classes = [AllowAny]
     queryset = User.objects.all()
     serializer_class = UserSerializer
