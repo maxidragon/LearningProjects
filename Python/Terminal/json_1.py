@@ -1,5 +1,5 @@
 import json
-path = r'C:\Users\Max\PycharmProjects\Informatyka\files/data.json'
+path = r'files/data.json'
 data = {
   "id": 5,
   "name": "Chelsey Dietrich",

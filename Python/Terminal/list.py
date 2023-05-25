@@ -8,7 +8,6 @@ for _ in range(3):
 
 print(names)
 '''
-#1 pokaz liste 2 dodaj 3 usun 4 zakoncz
 '''
 array = []
 while True:

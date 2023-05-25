@@ -1,5 +1,5 @@
-path = r'C:\Users\Max\PycharmProjects\Informatyka\files/mails.txt'
-path2 = r'C:\Users\Max\PycharmProjects\Informatyka\files/mails1.txt'
+path = r'files/mails.txt'
+path2 = r'files/mails1.txt'
 
 
 with open(path,'r',encoding='utf-8') as file:
