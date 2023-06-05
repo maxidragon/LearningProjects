@@ -18,6 +18,10 @@ Sign up
                    required="" id="id_username"
                    class="form-control">
         </div>
+        <div class="mb3">
+            <label for="id_email" class="form-label">Email</label>
+            <input type="email" name="email" required="" id="id_email" class="form-control" />
+        </div>
         <div class="mb-3">
             <label for="id_password1" class="form-label">Password:</label>
             <input type="password" name="password1" autocomplete="new-password" required="" id="id_password1"
@@ -34,4 +38,5 @@ Sign up
         {% csrf_token %}
     </form>
 </div>
+
 {% endblock content %}

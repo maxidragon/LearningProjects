@@ -32,13 +32,14 @@ class ArticleDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ArticleSerializer
 
 
-class ListUser(generics.ListAPIView):
-    permission_classes = [IsAdminUser]
+class ListCreateUser(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
+    def get_permissions(self):
+        if self.request.method == "GET":
+            permission_classes = [IsAdminUser]
+        else:
+            permission_classes = [AllowAny]
+        return [permission() for permission in permission_classes]
 
-class CreateUser(generics.CreateAPIView):
-    permission_classes = [AllowAny]
-    queryset = User.objects.all()
-    serializer_class = UserSerializer

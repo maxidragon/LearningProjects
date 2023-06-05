@@ -4,8 +4,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
+from verify_email.email_handler import send_verification_email
 
-from .forms import TaskForm
+from .forms import TaskForm, UserForm
 from .models import Task
 
 
@@ -72,16 +73,19 @@ def create(req):
 
 def signup(req):
     if req.method == 'GET':
-        return render(req, 'signup.html')
+        return render(req, 'signup.html', {'form': UserForm()})
     else:
         if req.POST.get('password1') == req.POST.get('password2'):
-            try:
-                user = User.objects.create_user(req.POST.get('username'), "", req.POST.get('password1'))
-            except IntegrityError:
-                return render(req, 'signup.html', {'message': f"{req.POST.get('username')} is alread taken"})
-            else:
-                user.save()
-                return redirect('home')
+            form = UserForm(req.POST)
+            if form.is_valid():
+                 inactive_user = send_verification_email(req, form)
+            return redirect('home')
+            # try:
+            #     user = User.objects.create_user(req.POST.get('username'), "", req.POST.get('password1'))
+            # except IntegrityError:
+            #     return render(req, 'signup.html', {'message': f"{req.POST.get('username')} is alread taken"})
+            # else:
+            #     user.save()
         else:
             return render(req, 'signup.html', {'message': 'Password does not match'})
 
@@ -97,7 +101,11 @@ def login_user(req):
             login(req, user)
             return redirect('home')
         else:
-            error = 'Username or password is incorrect'
+            user = User.objects.filter(username=username).first()
+            if user.is_active == False:
+                error = 'Please verify your email'
+            else:
+                error = 'Username or password is incorrect'
             return render(req, 'login.html', {'error': error})
 
 

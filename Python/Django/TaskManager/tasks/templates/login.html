@@ -30,8 +30,10 @@ Log in
             <div style="padding-bottom: 10px;">
                 <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Log in</button>
             </div>
+
             {% csrf_token %}
         </form>
+        <p><a href="{% url 'password_reset' %}">Lost password?</a></p>
     </div>
 
 
